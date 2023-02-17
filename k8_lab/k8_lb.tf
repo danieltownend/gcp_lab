@@ -1,6 +1,6 @@
 resource "kubernetes_service" "lb" {
   metadata {
-    name = "wordress"
+    name = "wordpress"
   }
   spec {
     selector = {
@@ -14,7 +14,5 @@ resource "kubernetes_service" "lb" {
     }
     type = "LoadBalancer"
   } 
-  depends_on = [
-    kubernetes_deployment.wp
-    ]
+
 }

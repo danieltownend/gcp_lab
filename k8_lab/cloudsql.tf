@@ -1,6 +1,6 @@
-resource "google_sql_database_instance" "primary" {
+resource "google_sql_database_instance" "wordpress" {
   name             = "wp"
-  database_version = "POSTGRES_14"
+  database_version = "MYSQL_5_7"
   region           = var.region
 
   settings {
@@ -9,7 +9,7 @@ resource "google_sql_database_instance" "primary" {
     tier = "db-f1-micro"
     ip_configuration {
         ipv4_enabled    = false
-        private_network = "projects/${var.project_id}/global/networks/${var.project_id}-vpc"
+        private_network = google_compute_network.vpc.id
     }
   }
   depends_on = [
@@ -19,11 +19,13 @@ resource "google_sql_database_instance" "primary" {
 
 resource "google_sql_user" "admin_user" {
   name     = var.db_user
-  instance = google_sql_database_instance.primary.name
+  instance = google_sql_database_instance.wordpress.name
   password = var.db_password
+  project  = var.project_id
 }
 
 resource "google_sql_database" "database" {
   name     = var.database_name
-  instance = google_sql_database_instance.primary.name
+  instance = google_sql_database_instance.wordpress.name
+  project  = var.project_id
 }
