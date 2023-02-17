@@ -1,3 +1,4 @@
+# Ubuntu container to help with troubleshooting
 resource "kubernetes_deployment" "ubuntu_container" {
   metadata {
     name = "ubuntu"
