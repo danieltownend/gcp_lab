@@ -1,7 +1,7 @@
 provider "google" {
-  project = "flask-377218"
-  region  = "us-west1"
-  zone    = "us-west1-a"
+  project = var.project_id
+  region  = var.region
+  zone    = var.zone
 }
 
 resource "google_compute_network" "vpc_network" {

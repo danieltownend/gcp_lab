@@ -1,3 +1,4 @@
+# Loadbalance to pods for port 80 (http)
 resource "kubernetes_service" "lb" {
   metadata {
     name = "wordpress"

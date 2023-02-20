@@ -43,6 +43,7 @@ resource "google_service_networking_connection" "vpc_peering" {
   ]
 }
 
+# Share routes
 resource "google_compute_network_peering_routes_config" "peering_routes" {
   peering              = google_service_networking_connection.vpc_peering.peering
   network              = google_compute_network.vpc.name
@@ -51,7 +52,7 @@ resource "google_compute_network_peering_routes_config" "peering_routes" {
 }
 
 
-# firewall
+# Firewall
 resource "google_compute_firewall" "rule" {
   name    = "myfirewall"
   network = google_compute_network.vpc.name

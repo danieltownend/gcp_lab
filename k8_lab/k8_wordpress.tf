@@ -1,3 +1,4 @@
+# Adding kubernetes provider to providers.tf breaks it so leave it here
 provider "kubernetes" { 
   host  = "https://${google_container_cluster.primary.endpoint}"
   token = data.google_client_config.provider.access_token
